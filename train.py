@@ -6,7 +6,7 @@ from pytorch_lightning import Trainer
 from pytorch_lightning import seed_everything
 from pytorch_lightning.strategies import DeepSpeedStrategy
 from pytorch_lightning.utilities import rank_zero_info
-from pytorch_lightning.utilities.meta import init_meta_context
+#from pytorch_lightning.utilities.meta import init_meta_context
 from torch.utils.data import Dataset, DataLoader
 import math
 
@@ -141,15 +141,15 @@ if __name__ == '__main__':
     train_dataset = CharDataset(text, args.block_size)  # one line of poem is roughly 50 characters
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, num_workers=args.num_workers)
 
-    with init_meta_context():
-        model = GPT(
-            vocab_size=train_dataset.vocab_size,
-            block_size=train_dataset.block_size,
-            n_layer=args.n_layer,
-            n_head=args.n_head,
-            n_embd=args.n_embd,
-            learning_rate=args.learning_rate
-        )
+   # with init_meta_context():
+    model = GPT(
+        vocab_size=train_dataset.vocab_size,
+        block_size=train_dataset.block_size,
+        n_layer=args.n_layer,
+        n_head=args.n_head,
+        n_embd=args.n_embd,
+        learning_rate=args.learning_rate
+    )
 
     lr_decay = LearningRateDecayCallback(
         learning_rate=6e-4,
