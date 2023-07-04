@@ -1,5 +1,5 @@
-pytorch-lightning>=1.6.0
-torch>=1.10.0
+pytorch-lightning=1.9.4
+torch==2.0.1
 deepspeed
 numpy
 psutil
